@@ -5,6 +5,43 @@
         <link rel="stylesheet" href="https://unpkg.com/98.css" />
     </head>
     <body>
-
+        <div class="window" style="margin: 32px; width: 250px;">
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    Fontmatica!
+                </div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="field-border" style="padding: 8px;">
+                    text goes here i guess
+                </div>
+                <div class="field-row-stacked">
+                    <label for="text17">Text to Display</label>
+                    <input id="display-text" type="text">
+                </div>
+                <fieldset>
+                    <legend>Animation Style</legend>
+                    <div class="field-row">
+                        <input id="none" type="radio" name="none">
+                        <label for="none">None</label>
+                    </div>
+                    <div class="field-row">
+                        <input id="sine" type="radio" name="sine">
+                        <label for="sine">Sine</label>
+                    </div>
+                    <div class="field-row">
+                        <input id="cosine" type="radio" name="cosine">
+                        <label for="cosine">Cosine</label>
+                    </div>
+                    <div class="field-row">
+                        <input id="random" type="radio" name="random">
+                        <label for="random">Random</label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
     </body>
 </html>
