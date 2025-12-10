@@ -15,9 +15,16 @@
   "type": "commonjs",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build"
   },
   "dependencies": {
-    "98.css": "^0.1.21"
+    "98.css": "^0.1.21",
+    "opentype.js": "^1.3.4",
+    "wawoff2": "^2.0.1"
+  },
+  "devDependencies": {
+    "vite": "^7.2.7"
   }
 }

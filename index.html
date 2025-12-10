@@ -2,8 +2,7 @@
 <html>
     <head>
         <title>Fontmatica!</title>
-        <link rel="stylesheet" href="node_modules/98.css/style.css" />
-        <script src="script.js"></script>
+        <script type="module" src="script.js"></script>
     </head>
     <body style="background-color: #008080;">
         <div class="window" style="margin: 32px; width: 70%;">
@@ -16,9 +15,7 @@
                 </div>
             </div>
             <div class="window-body">
-                <div class="field-border" style="padding: 8px;">
-                    text goes here i guess
-                </div>
+                <canvas class="field-border" id="draw-canvas" style="padding: 8px;"></canvas>
                 <div class="field-row-stacked">
                     <label for="text17">Text to Display</label>
                     <input id="display-text" type="text">
