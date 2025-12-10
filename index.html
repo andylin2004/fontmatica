@@ -20,27 +20,36 @@
                     <label for="text17">Text to Display</label>
                     <input id="display-text" type="text">
                 </div>
-                <form id="animation-style">
-                    <fieldset>
-                        <legend>Animation Style</legend>
-                        <div class="field-row">
-                            <input id="none" type="radio" name="animation-style" checked>
-                            <label for="none">None</label>
-                        </div>
-                        <div class="field-row">
-                            <input id="sine" type="radio" name="animation-style">
-                            <label for="sine">Sine</label>
-                        </div>
-                        <div class="field-row">
-                            <input id="cosine" type="radio" name="animation-style">
-                            <label for="cosine">Cosine</label>
-                        </div>
-                        <div class="field-row">
-                            <input id="random" type="radio" name="animation-style">
-                            <label for="random">Random</label>
-                        </div>
-                    </fieldset>
-                </form>
+                <fieldset id="animation-style">
+                    <legend>Animation Style</legend>
+                    <div class="field-row">
+                        <input id="none" type="radio" name="animation-style" checked>
+                        <label for="none">None</label>
+                    </div>
+                    <div class="field-row">
+                        <input id="sine" type="radio" name="animation-style">
+                        <label for="sine">Sine</label>
+                    </div>
+                    <div class="field-row">
+                        <input id="cosine" type="radio" name="animation-style">
+                        <label for="cosine">Cosine</label>
+                    </div>
+                    <div class="field-row">
+                        <input id="random" type="radio" name="animation-style">
+                        <label for="random">Random</label>
+                    </div>
+                </fieldset>
+                <fieldset id="animation-direction">
+                    <legend>Animation Direction</legend>
+                    <div class="field-row">
+                        <input id="down-up" type="radio" name="animation-direction" checked>
+                        <label for="down-up">Down-Up</label>
+                    </div>
+                    <div class="field-row">
+                        <input id="left-right" type="radio" name="animation-direction" checked>
+                        <label for="left-right">Left-Right</label>
+                    </div>
+                </fieldset>
                 <fieldset id="amplitude" hidden="true">
                     <div class="field-row">
                         <label for="range-label">Amplitude</label>
