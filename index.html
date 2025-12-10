@@ -46,7 +46,7 @@
                         <label for="random">Random</label>
                     </div>
                 </fieldset>
-                <fieldset id="animation-direction">
+                <fieldset id="animation-direction" hidden="true">
                     <legend>Animation Direction</legend>
                     <div class="field-row">
                         <input id="down-up" type="radio" name="animation-direction" checked>
@@ -60,6 +60,13 @@
                 <fieldset id="amplitude" hidden="true">
                     <div class="field-row">
                         <label for="range-label">Amplitude</label>
+                        <input id="range-slider" type="range" min="0" max="20" value="1"/>
+                        <input id="range-num" type="number" style="width: 15%;"/>
+                    </div>
+                </fieldset>
+                <fieldset id="shift" hidden="true">
+                    <div class="field-row">
+                        <label for="range-label">Shift</label>
                         <input id="range-slider" type="range" min="0" max="20" value="1"/>
                         <input id="range-num" type="number" style="width: 15%;"/>
                     </div>

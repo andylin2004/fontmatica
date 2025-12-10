@@ -2,6 +2,7 @@ import opentype from 'opentype.js';
 import '98.css';
 
 let amplitude_val = 0;
+let shift_val = 0;
 let direction = 'down-up';
 let text_to_display = "sus";
 let animation_style = 'none';
@@ -14,6 +15,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const amplitude_num_input = document.querySelector('#amplitude #range-num');
     const amplitude_slider_input = document.querySelector('#amplitude #range-slider');
 
+    const shift_box = document.getElementById('shift');
+    const shift_num_input = document.querySelector('#shift #range-num');
+    const shift_slider_input = document.querySelector('#shift #range-slider');
+
     const text_to_display_input = document.getElementById('display-text');
     /** @type {CanvasRenderingContext2D} */
     const canvas = document.getElementById('draw-canvas').getContext('2d');
@@ -21,6 +26,11 @@ window.addEventListener('DOMContentLoaded', () => {
     function update_amplitude_values() {
         amplitude_num_input.value = amplitude_val;
         amplitude_slider_input.value = amplitude_val;
+    }
+
+    function update_shift_values() {
+        shift_num_input.value = shift_val;
+        shift_slider_input.value = shift_val;
     }
 
     async function render_text() {
@@ -60,10 +70,10 @@ window.addEventListener('DOMContentLoaded', () => {
             let move_amount;
             switch (animation_style) {
                 case 'sine':
-                    move_amount =  Math.sin(i / 10) * Math.PI * 2;
+                    move_amount = Math.sin(i / 10 + shift_val * Math.PI / 10) * Math.PI * 2;
                     break;
                 case 'cosine':
-                    move_amount = Math.cos(i / 10) * Math.PI * 2;
+                    move_amount = Math.cos(i / 10 + shift_val * Math.PI / 10) * Math.PI * 2;
                     break;
                 case 'random':
                     move_amount = Math.random() * 2 - 1;
@@ -102,13 +112,29 @@ window.addEventListener('DOMContentLoaded', () => {
 
     render_text();
     update_amplitude_values();
+    update_shift_values();
 
     animation_style_box.addEventListener("change", (event) => {
         const new_value = event.target.id;
         animation_style = new_value;
 
         amplitude_box.hidden = (new_value === 'none');
+        animation_direction.hidden = (new_value === 'none');
+        shift_box.hidden = (new_value === 'none' || new_value === 'random');
 
+        render_text();
+    });
+
+    shift_box.addEventListener("change", (event) => {
+        let new_value = event.target.value;
+        if (new_value > 20) {
+            new_value = 20;
+        } else if (new_value < 0) {
+            new_value = 0;
+        }
+
+        shift_val = new_value;
+        update_shift_values();
         render_text();
     });
 
@@ -131,6 +157,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     animation_direction.addEventListener('change', (event) => {
         direction = event.target.id;
-        console.log(direction);
+        render_text();
     })
 });
