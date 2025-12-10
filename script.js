@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const amplitude_slider_input = document.querySelector('#amplitude #range-slider');
 
     const text_to_display_input = document.getElementById('display-text');
+    /** @type {CanvasRenderingContext2D} */
     const canvas = document.getElementById('draw-canvas').getContext('2d');
 
     function update_amplitude_values() {
