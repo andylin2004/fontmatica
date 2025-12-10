@@ -42,8 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const { width, height } = canvas.canvas;
 
-        console.log(width, height);
-
         let existing = canvas.getImageData(0, 0, width, height);
         let distorted = canvas.createImageData(width, height);
 
@@ -82,7 +80,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 if (direction === 'left-right') {
                     srcIdx = (v * width + i) * 4;
                     dstIdx = (newV * width + i) * 4;
-                    
                 } else {
                     srcIdx = (i * width + v) * 4;
                     dstIdx = (i * width + newV) * 4;
