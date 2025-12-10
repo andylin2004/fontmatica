@@ -60,17 +60,20 @@ window.addEventListener('DOMContentLoaded', () => {
             let move_amount;
             switch (animation_style) {
                 case 'sine':
-                    move_amount = amplitude_val * Math.sin(i / 10) * Math.PI * 2;
+                    move_amount =  Math.sin(i / 10) * Math.PI * 2;
                     break;
                 case 'cosine':
-                    move_amount = amplitude_val * Math.cos(i / 10) * Math.PI * 2;
+                    move_amount = Math.cos(i / 10) * Math.PI * 2;
+                    break;
+                case 'random':
+                    move_amount = Math.random() * 2 - 1;
                     break;
                 default:
                     move_amount = 0;
             }
 
+            move_amount *= amplitude_val;
             move_amount = Math.round(move_amount);
-            if (move_amount === 0) continue;
 
             for (let v = 0; v < other_dimension; v++) {
                 
