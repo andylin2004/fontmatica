@@ -3,9 +3,10 @@
     <head>
         <title>Fontmatica!</title>
         <link rel="stylesheet" href="https://unpkg.com/98.css" />
+        <script src="script.js"></script>
     </head>
-    <body>
-        <div class="window" style="margin: 32px; width: 250px;">
+    <body style="background-color: #008080;">
+        <div class="window" style="margin: 32px; width: 70%;">
             <div class="title-bar">
                 <div class="title-bar-text">
                     Fontmatica!
@@ -22,23 +23,32 @@
                     <label for="text17">Text to Display</label>
                     <input id="display-text" type="text">
                 </div>
-                <fieldset>
-                    <legend>Animation Style</legend>
+                <form id="animation-style">
+                    <fieldset>
+                        <legend>Animation Style</legend>
+                        <div class="field-row">
+                            <input id="none" type="radio" name="animation-style" checked>
+                            <label for="none">None</label>
+                        </div>
+                        <div class="field-row">
+                            <input id="sine" type="radio" name="animation-style">
+                            <label for="sine">Sine</label>
+                        </div>
+                        <div class="field-row">
+                            <input id="cosine" type="radio" name="animation-style">
+                            <label for="cosine">Cosine</label>
+                        </div>
+                        <div class="field-row">
+                            <input id="random" type="radio" name="animation-style">
+                            <label for="random">Random</label>
+                        </div>
+                    </fieldset>
+                </form>
+                <fieldset id="amplitude" hidden="true">
                     <div class="field-row">
-                        <input id="none" type="radio" name="none">
-                        <label for="none">None</label>
-                    </div>
-                    <div class="field-row">
-                        <input id="sine" type="radio" name="sine">
-                        <label for="sine">Sine</label>
-                    </div>
-                    <div class="field-row">
-                        <input id="cosine" type="radio" name="cosine">
-                        <label for="cosine">Cosine</label>
-                    </div>
-                    <div class="field-row">
-                        <input id="random" type="radio" name="random">
-                        <label for="random">Random</label>
+                        <label for="range-label">Amplitude</label>
+                        <input id="range-slider" type="range" min="0" max="20" value="1"/>
+                        <input id="range-num" type="number" style="width: 15%;"/>
                     </div>
                 </fieldset>
             </div>
