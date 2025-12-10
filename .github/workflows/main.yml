@@ -1,0 +1,16 @@
+name: Deploy Website
+on: [push]
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull node packages
+        run: npm install
+      - name: Build with Vite
+        run: npm run build
+      - name: Deploy to GitHub Pages
+        uses: actions/upload-pages-artifact@v4.0.0
+        with:
+          path: dist/
+      
+      
