@@ -43,6 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const spawn_upload_window_btn = document.getElementById('show-upload-font-window');
     const upload_font_window = document.getElementById('upload-font-window');
+    const close_upload_window = document.getElementById('close-upload-window');
     
     // sync values
     function update_amplitude_values() {
@@ -60,7 +61,12 @@ window.addEventListener('DOMContentLoaded', () => {
         play_speed_slider_input.value = play_speed;
     }
 
-    spawn_upload_window_btn.addEventListener('click', (event) => {
+    // listeners
+    close_upload_window.addEventListener('click', () => {
+        upload_font_window.hidden = true;
+    })
+
+    spawn_upload_window_btn.addEventListener('click', () => {
         upload_font_window.hidden = false;
         document.activeElement?.blur && document.activeElement.blur();
     });
@@ -76,6 +82,11 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         file_drop.value = null;
+        upload_file_btn.disabled = true;
+    });
+
+    file_drop.addEventListener('change', (event) => {
+        upload_file_btn.disabled = (file_drop.files.length == 0);
     });
 
     font_selection.addEventListener('change', (event) => {
@@ -83,7 +94,6 @@ window.addEventListener('DOMContentLoaded', () => {
         render_text();
     })
 
-    // listeners
     animation_style_box.addEventListener("change", (event) => {
         const new_value = event.target.id;
         animation_style = new_value;
