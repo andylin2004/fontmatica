@@ -1,0 +1,218 @@
+/* :root {
+  --w7-mn-left: 28px; } */
+
+ul[role] {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  cursor: default;
+}
+
+ul[role="menubar"] {
+  display: flex;
+  background: #c0c0c0
+}
+
+ul[role="menubar"]>[role="menuitem"] {
+  position: relative;
+  padding: 4px 8px;
+}
+
+ul[role="menubar"]>[role="menuitem"]:hover {
+  box-shadow: 0px 0px #0a0a0a, inset -1px -1px grey, inset 0px 0px #dfdfdf, inset 1px 1px #fff;
+  outline: none;
+}
+
+ul[role="menubar"]>[role="menuitem"]:focus,
+ul[role="menubar"]>[role="menuitem"]:focus-within {
+  box-shadow: 0px 0px #0a0a0a, inset 1px 1px grey, inset 0px 0px #dfdfdf, inset -1px -1px #fff;
+  outline: none;
+}
+
+ul[role="menubar"]>[role="menuitem"]:focus~[role="menuitem"]:focus,
+ul[role="menubar"]>[role="menuitem"]:focus~[role="menuitem"]:focus-within,
+ul[role="menubar"]>[role="menuitem"]:focus-within~[role="menuitem"]:focus,
+ul[role="menubar"]>[role="menuitem"]:focus-within~[role="menuitem"]:focus-within,
+ul[role="menubar"]>[role="menuitem"]:hover~[role="menuitem"]:focus,
+ul[role="menubar"]>[role="menuitem"]:hover~[role="menuitem"]:focus-within {
+  background: transparent;
+  color: inherit;
+}
+
+ul[role="menubar"]>[role="menuitem"]:focus:has(~ [role="menuitem"]:hover),
+ul[role="menubar"]>[role="menuitem"]:focus-within:has(~ [role="menuitem"]:hover),
+ul[role="menubar"]>[role="menuitem"]:hover:has(~ [role="menuitem"]:hover) {
+  background: transparent;
+  color: inherit;
+}
+
+ul[role="menu"] {
+  position: relative;
+  min-width: 150px;
+  padding: 2px;
+  background: var(--w7-surface);
+  color: initial;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf
+}
+
+ul[role="menu"]::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  left: var(--w7-mn-left);
+  width: 2px;
+  height: calc(100% - 4px);
+}
+
+[role="menuitem"] ul[role="menu"] {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 99;
+  background-color: #b5b5b5;
+}
+
+ul[role="menu"] [role="menuitem"]>[role="menu"] {
+  top: -4px;
+  left: 100%;
+}
+
+ul[role="menu"]>[role="menuitem"]>a,
+ul[role="menu"]>[role="menuitem"]>button,
+ul[role="menu"]>[role="menuitem"]>label,
+ul[role="menu"]>[role="menuitem"][aria-haspopup="true"] {
+  all: unset;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 4px 10px 4px 27px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+ul[role="menu"]>[role="menuitem"]>a:hover,
+ul[role="menu"]>[role="menuitem"]>a:focus-visible,
+ul[role="menu"]>[role="menuitem"]>button:hover,
+ul[role="menu"]>[role="menuitem"]>button:focus-visible,
+ul[role="menu"]>[role="menuitem"]>label:hover,
+ul[role="menu"]>[role="menuitem"]>label:focus-visible,
+ul[role="menu"]>[role="menuitem"][aria-haspopup="true"]:hover,
+ul[role="menu"]>[role="menuitem"][aria-haspopup="true"]:focus-visible {
+  background-color: #000080;
+  color: #fff
+}
+
+ul[role="menu"]>[role="menuitem"]>button:hover::before,
+ul[role="menu"]>[role="menuitem"]>button::after {
+  content: none;
+}
+
+ul[role="menu"]>[role="menuitem"][aria-haspopup="true"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-left-color: currentColor;
+}
+
+ul [role="menuitem"] {
+  position: relative;
+}
+
+ul [role="menuitem"]>input[type] {
+  display: none;
+}
+
+ul [role="menuitem"]>input[type]+label {
+  display: block;
+  position: relative;
+}
+
+ul [role="menuitem"]>input[type]+label::before {
+  all: unset;
+  /* unset the standalone checkbox/radio styles */
+  background: var(--w7-li-bg-hl);
+  box-shadow: 0 0 0 1px #b3d3f9;
+  border-radius: inherit;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+}
+
+ul [role="menuitem"]>input[type]:checked+label::before {
+  content: "";
+}
+
+ul [role="menuitem"]>input[type][type="radio"]:checked+label::after {
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: radial-gradient(circle at 75% 25%, #d5d4ea, #333583);
+  border: 1px solid #1a1490;
+  box-shadow: none;
+}
+
+ul [role="menuitem"]>input[type][type="checkbox"]:checked+label::after {
+  color: #0c12a1;
+  font-size: 10pt;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-52%);
+}
+
+ul [role="menuitem"]:focus>[role="menu"],
+ul [role="menuitem"]:focus-within>[role="menu"] {
+  display: block;
+}
+
+ul [role="menuitem"]:focus:has(~ [role="menuitem"]:hover)>[role="menu"],
+ul [role="menuitem"]:focus-within:has(~ [role="menuitem"]:hover)>[role="menu"] {
+  display: none;
+}
+
+ul [role="menuitem"][aria-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+ul [role="menuitem"].has-divider::after {
+  content: "";
+  pointer-events: none;
+  display: block;
+  margin: 3px 0 2px;
+  height: 2px;
+  margin-left: var(--w7-mn-left);
+  box-shadow: inset 0 1px grey, inset 0 -1px #fff;
+}
+
+ul [role="menuitem"] img {
+  position: absolute;
+  z-index: 1;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+ul [role="menuitem"] span {
+  margin-left: 32px;
+}
+
+ul.can-hover [role="menuitem"]:hover~[role="menuitem"]:focus,
+ul.can-hover [role="menuitem"]:hover~[role="menuitem"]:focus-within {
+  background: transparent;
+  color: inherit;
+}
+
+ul.can-hover [role="menuitem"]:hover~[role="menuitem"]:focus>[role="menu"],
+ul.can-hover [role="menuitem"]:hover~[role="menuitem"]:focus-within>[role="menu"] {
+  display: none;
+}

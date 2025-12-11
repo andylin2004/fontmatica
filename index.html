@@ -5,9 +5,6 @@
         <script type="module" src="script.js"></script>
     </head>
     <body style="background-color: #008080;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         overflow-x: hidden;"
     >
         <div class="window" style="margin: 32px; width: 95%; align-self: center;">
@@ -19,6 +16,18 @@
                     <button aria-label="Close"></button>
                 </div>
             </div>
+            <ul role="menubar" class="can-hover">
+                <li role="menuitem" tabindex="0" aria-haspopup="true" id="file-menu">
+                    File
+                    <ul role="menu">
+                        <li role="menuitem">
+                            <a id="show-upload-font-window">
+                                Upload Font File
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
             <div class="window-body">
                 <div class="field-border" style="padding: 8px; overflow: scroll;">
                     <canvas id="draw-canvas"></canvas>
@@ -26,11 +35,6 @@
                 <div class="field-row-stacked">
                     <label for="display-text">Text to Display</label>
                     <input id="display-text" type="text">
-                </div>
-                <div class="field-row">
-                    <label for="file-drop">Upload Font File</label>
-                    <input id="file-drop" type="file" accept="font/*">
-                    <button id="upload-file">Upload File</button>
                 </div>
                 <div class="field-row">
                     <label for="font-selection">Select Font</label>
@@ -90,6 +94,24 @@
                     </div>
                 </fieldset>
                 <button id="play">Play!</button>
+            </div>
+        </div>
+
+        <div class="window" id="upload-font-window" style="width: 500px; margin: 32px;" hidden="true">
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    Upload New Font!
+                </div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="field-row">
+                    <label for="file-drop">Upload Font File</label>
+                    <input id="file-drop" type="file" accept="font/*">
+                    <button id="upload-file">Upload File</button>
+                </div>
             </div>
         </div>
     </body>

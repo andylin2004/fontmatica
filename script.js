@@ -1,5 +1,6 @@
 import opentype from 'opentype.js';
 import '98.css';
+import './menubar98.css'
 
 let amplitude_val = 0;
 let shift_val = 0;
@@ -39,6 +40,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const upload_file_btn = document.getElementById('upload-file');
 
     const font_selection = document.getElementById('font-selection');
+
+    const spawn_upload_window_btn = document.getElementById('show-upload-font-window');
+    const upload_font_window = document.getElementById('upload-font-window');
     
     // sync values
     function update_amplitude_values() {
@@ -55,6 +59,11 @@ window.addEventListener('DOMContentLoaded', () => {
         play_speed_num_input.value = play_speed;
         play_speed_slider_input.value = play_speed;
     }
+
+    spawn_upload_window_btn.addEventListener('click', (event) => {
+        upload_font_window.hidden = false;
+        document.activeElement?.blur && document.activeElement.blur();
+    });
 
     upload_file_btn.addEventListener('click', () => {
         for (const file of file_drop.files) {
