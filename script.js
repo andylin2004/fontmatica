@@ -85,16 +85,16 @@ window.addEventListener('DOMContentLoaded', () => {
         upload_file_btn.disabled = true;
     });
 
-    file_drop.addEventListener('change', (event) => {
+    file_drop.addEventListener('input', () => {
         upload_file_btn.disabled = (file_drop.files.length == 0);
     });
 
-    font_selection.addEventListener('change', (event) => {
+    font_selection.addEventListener('input', (event) => {
         current_font_used = uploaded_fonts[event.target.value];
         render_text();
     })
 
-    animation_style_box.addEventListener("change", (event) => {
+    animation_style_box.addEventListener('input', (event) => {
         const new_value = event.target.id;
         animation_style = new_value;
 
@@ -105,7 +105,7 @@ window.addEventListener('DOMContentLoaded', () => {
         render_text();
     });
 
-    shift_box.addEventListener("change", (event) => {
+    shift_box.addEventListener('input', (event) => {
         let new_value = event.target.value;
         if (new_value > 19) {
             new_value = 19;
@@ -118,7 +118,7 @@ window.addEventListener('DOMContentLoaded', () => {
         render_text();
     });
 
-    amplitude_box.addEventListener("change", (event) => {
+    amplitude_box.addEventListener('input', (event) => {
         let new_value = event.target.value;
         if (new_value > 20) {
             new_value = 20;
@@ -130,7 +130,7 @@ window.addEventListener('DOMContentLoaded', () => {
         render_text();
     });
 
-    play_speed_box.addEventListener('change', (event) => {
+    play_speed_box.addEventListener('input', (event) => {
         let new_value = event.target.value;
         console.log(new_value);
         if (new_value > 5) {
@@ -143,12 +143,12 @@ window.addEventListener('DOMContentLoaded', () => {
         render_text();
     });
 
-    text_to_display_input.addEventListener('change', (event) => {
+    text_to_display_input.addEventListener('input', (event) => {
         text_to_display = event.target.value;
         render_text();
     })
 
-    animation_direction.addEventListener('change', (event) => {
+    animation_direction.addEventListener('input', (event) => {
         direction = event.target.id;
         render_text();
     })
