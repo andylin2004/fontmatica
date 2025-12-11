@@ -6,6 +6,8 @@ let shift_val = 0;
 let direction = 'down-up';
 let text_to_display = "sus";
 let animation_style = 'none';
+let play_animation = false;
+let play_speed = 0.1;
 
 window.addEventListener('DOMContentLoaded', () => {
     const animation_style_box = document.getElementById('animation-style');
@@ -19,9 +21,15 @@ window.addEventListener('DOMContentLoaded', () => {
     const shift_num_input = document.querySelector('#shift #range-num');
     const shift_slider_input = document.querySelector('#shift #range-slider');
 
+    const play_speed_box = document.getElementById('play-speed');
+    const play_speed_num_input = document.querySelector('#play-speed #range-num');
+    const play_speed_slider_input = document.querySelector('#play-speed #range-slider');
+
     const text_to_display_input = document.getElementById('display-text');
     /** @type {CanvasRenderingContext2D} */
     const canvas = document.getElementById('draw-canvas').getContext('2d');
+
+    const play_btn = document.getElementById('play');
 
     function update_amplitude_values() {
         amplitude_num_input.value = amplitude_val;
@@ -31,6 +39,11 @@ window.addEventListener('DOMContentLoaded', () => {
     function update_shift_values() {
         shift_num_input.value = shift_val;
         shift_slider_input.value = shift_val;
+    }
+
+    function update_play_speed() {
+        play_speed_num_input.value = play_speed;
+        play_speed_slider_input.value = play_speed;
     }
 
     async function render_text() {
@@ -113,6 +126,7 @@ window.addEventListener('DOMContentLoaded', () => {
     render_text();
     update_amplitude_values();
     update_shift_values();
+    update_play_speed();
 
     animation_style_box.addEventListener("change", (event) => {
         const new_value = event.target.id;
@@ -127,8 +141,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     shift_box.addEventListener("change", (event) => {
         let new_value = event.target.value;
-        if (new_value > 20) {
-            new_value = 20;
+        if (new_value > 19) {
+            new_value = 19;
         } else if (new_value < 0) {
             new_value = 0;
         }
@@ -150,6 +164,19 @@ window.addEventListener('DOMContentLoaded', () => {
         render_text();
     });
 
+    play_speed_box.addEventListener('change', (event) => {
+        let new_value = event.target.value;
+        console.log(new_value);
+        if (new_value > 5) {
+            new_value = 5;
+        } else if (new_value < 0) {
+            new_value = 0;
+        }
+        play_speed = new_value;
+        update_play_speed();
+        render_text();
+    });
+
     text_to_display_input.addEventListener('change', (event) => {
         text_to_display = event.target.value;
         render_text();
@@ -158,5 +185,16 @@ window.addEventListener('DOMContentLoaded', () => {
     animation_direction.addEventListener('change', (event) => {
         direction = event.target.id;
         render_text();
+    })
+
+    play_btn.addEventListener('click', async () => {
+        play_animation = !play_animation;
+        play_btn.innerText = play_animation ? "Stop" : "Play"
+        
+        while (play_animation) {
+            await new Promise(resolve => setTimeout(resolve, play_speed * 1000));
+            shift_val = (shift_val + 1) % 20;
+            render_text();
+        }
     })
 });
