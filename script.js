@@ -8,6 +8,8 @@ let text_to_display = "sus";
 let animation_style = 'none';
 let play_animation = false;
 let play_speed = 0.1;
+let current_font_used;
+let uploaded_fonts = {};
 
 window.addEventListener('DOMContentLoaded', () => {
     // DOMS
@@ -31,6 +33,12 @@ window.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('draw-canvas').getContext('2d');
 
     const play_btn = document.getElementById('play');
+
+    /** @type {HTMLInputElement} */
+    const file_drop = document.getElementById('file-drop');
+    const upload_file_btn = document.getElementById('upload-file');
+
+    const font_selection = document.getElementById('font-selection');
     
     // sync values
     function update_amplitude_values() {
@@ -47,6 +55,24 @@ window.addEventListener('DOMContentLoaded', () => {
         play_speed_num_input.value = play_speed;
         play_speed_slider_input.value = play_speed;
     }
+
+    upload_file_btn.addEventListener('click', () => {
+        for (const file of file_drop.files) {
+            uploaded_fonts[file.name] = URL.createObjectURL(file);
+            let new_option = document.createElement('option');
+            new_option.value = file.name;
+            new_option.innerText = file.name;
+
+            font_selection.appendChild(new_option);
+        }
+
+        file_drop.value = null;
+    });
+
+    font_selection.addEventListener('change', (event) => {
+        current_font_used = uploaded_fonts[event.target.value];
+        render_text();
+    })
 
     // listeners
     animation_style_box.addEventListener("change", (event) => {
@@ -115,6 +141,7 @@ window.addEventListener('DOMContentLoaded', () => {
         while (play_animation) {
             await new Promise(resolve => setTimeout(resolve, play_speed * 1000));
             shift_val = (shift_val + 1) % 20;
+            update_shift_values();
             render_text();
         }
     })
@@ -123,7 +150,14 @@ window.addEventListener('DOMContentLoaded', () => {
     async function render_text() {
         const font_size = 60;
         // initial render
-        let font = opentype.parse(await (await fetch('OpenSans-VariableFont_wdth,wght.ttf')).arrayBuffer())
+        let font;
+        if (current_font_used) {
+            font = await fetch(current_font_used);
+        } else {
+            font = await fetch('OpenSans-VariableFont_wdth,wght.ttf');
+        }
+
+        font = opentype.parse(await font.arrayBuffer());
 
         // adjust canvas size to fit text
         const path = font.getPath(text_to_display, 0, font_size, font_size);
