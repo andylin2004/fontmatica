@@ -10,6 +10,7 @@ let play_animation = false;
 let play_speed = 0.1;
 
 window.addEventListener('DOMContentLoaded', () => {
+    // DOMS
     const animation_style_box = document.getElementById('animation-style');
     const animation_direction = document.getElementById('animation-direction');
 
@@ -30,7 +31,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('draw-canvas').getContext('2d');
 
     const play_btn = document.getElementById('play');
-
+    
+    // sync values
     function update_amplitude_values() {
         amplitude_num_input.value = amplitude_val;
         amplitude_slider_input.value = amplitude_val;
@@ -46,6 +48,78 @@ window.addEventListener('DOMContentLoaded', () => {
         play_speed_slider_input.value = play_speed;
     }
 
+    // listeners
+    animation_style_box.addEventListener("change", (event) => {
+        const new_value = event.target.id;
+        animation_style = new_value;
+
+        amplitude_box.hidden = (new_value === 'none');
+        animation_direction.hidden = (new_value === 'none');
+        shift_box.hidden = (new_value === 'none' || new_value === 'random');
+
+        render_text();
+    });
+
+    shift_box.addEventListener("change", (event) => {
+        let new_value = event.target.value;
+        if (new_value > 19) {
+            new_value = 19;
+        } else if (new_value < 0) {
+            new_value = 0;
+        }
+
+        shift_val = new_value;
+        update_shift_values();
+        render_text();
+    });
+
+    amplitude_box.addEventListener("change", (event) => {
+        let new_value = event.target.value;
+        if (new_value > 20) {
+            new_value = 20;
+        } else if (new_value < 0) {
+            new_value = 0;
+        }
+        amplitude_val = new_value;
+        update_amplitude_values();
+        render_text();
+    });
+
+    play_speed_box.addEventListener('change', (event) => {
+        let new_value = event.target.value;
+        console.log(new_value);
+        if (new_value > 5) {
+            new_value = 5;
+        } else if (new_value < 0) {
+            new_value = 0;
+        }
+        play_speed = new_value;
+        update_play_speed();
+        render_text();
+    });
+
+    text_to_display_input.addEventListener('change', (event) => {
+        text_to_display = event.target.value;
+        render_text();
+    })
+
+    animation_direction.addEventListener('change', (event) => {
+        direction = event.target.id;
+        render_text();
+    })
+
+    play_btn.addEventListener('click', async () => {
+        play_animation = !play_animation;
+        play_btn.innerText = play_animation ? "Stop" : "Play"
+        
+        while (play_animation) {
+            await new Promise(resolve => setTimeout(resolve, play_speed * 1000));
+            shift_val = (shift_val + 1) % 20;
+            render_text();
+        }
+    })
+
+    // main functionality
     async function render_text() {
         const font_size = 60;
         // initial render
@@ -121,80 +195,10 @@ window.addEventListener('DOMContentLoaded', () => {
         canvas.putImageData(distorted, 0, 0);
     }
 
+    // on init
     text_to_display_input.value = text_to_display;
-
     render_text();
     update_amplitude_values();
     update_shift_values();
     update_play_speed();
-
-    animation_style_box.addEventListener("change", (event) => {
-        const new_value = event.target.id;
-        animation_style = new_value;
-
-        amplitude_box.hidden = (new_value === 'none');
-        animation_direction.hidden = (new_value === 'none');
-        shift_box.hidden = (new_value === 'none' || new_value === 'random');
-
-        render_text();
-    });
-
-    shift_box.addEventListener("change", (event) => {
-        let new_value = event.target.value;
-        if (new_value > 19) {
-            new_value = 19;
-        } else if (new_value < 0) {
-            new_value = 0;
-        }
-
-        shift_val = new_value;
-        update_shift_values();
-        render_text();
-    });
-
-    amplitude_box.addEventListener("change", (event) => {
-        let new_value = event.target.value;
-        if (new_value > 20) {
-            new_value = 20;
-        } else if (new_value < 0) {
-            new_value = 0;
-        }
-        amplitude_val = new_value;
-        update_amplitude_values();
-        render_text();
-    });
-
-    play_speed_box.addEventListener('change', (event) => {
-        let new_value = event.target.value;
-        console.log(new_value);
-        if (new_value > 5) {
-            new_value = 5;
-        } else if (new_value < 0) {
-            new_value = 0;
-        }
-        play_speed = new_value;
-        update_play_speed();
-        render_text();
-    });
-
-    text_to_display_input.addEventListener('change', (event) => {
-        text_to_display = event.target.value;
-        render_text();
-    })
-
-    animation_direction.addEventListener('change', (event) => {
-        direction = event.target.id;
-        render_text();
-    })
-
-    play_btn.addEventListener('click', async () => {
-        play_animation = !play_animation;
-        play_btn.innerText = play_animation ? "Stop" : "Play"
-        
-        while (play_animation) {
-            await new Promise(resolve => setTimeout(resolve, play_speed * 1000));
-            shift_val = (shift_val + 1) % 20;
-            render_text();
-        }
-    })
 });
